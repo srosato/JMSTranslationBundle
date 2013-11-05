@@ -96,11 +96,15 @@ class FormExtractor implements FileVisitorInterface, \PHPParser_NodeVisitor
                 	continue;
                 }
 
+                if ('help' === $item->key->value && !$item->value instanceof \PHPParser_Node_Scalar_String) {
+                    continue;
+                }
+
                 if ('choices' === $item->key->value && !$item->value instanceof \PHPParser_Node_Expr_Array) {
                     continue;
                 }
 
-                if ('label' !== $item->key->value && 'empty_value' !== $item->key->value && 'choices' !== $item->key->value && 'invalid_message' !== $item->key->value) {
+                if ('help' !== $item->key->value && 'label' !== $item->key->value && 'empty_value' !== $item->key->value && 'choices' !== $item->key->value && 'invalid_message' !== $item->key->value) {
                     continue;
                 }
 
